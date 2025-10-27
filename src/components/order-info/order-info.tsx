@@ -8,9 +8,14 @@ import { useParams } from 'react-router-dom';
 
 export const OrderInfo: FC = () => {
   const { number } = useParams();
-  const orderData = useSelector(state => state.getOrders.orders.find(order => order.number === Number(number)));
-
+  const ordersFromFeed = useSelector(state => state.getOrders.orders);
+  const ordersFromProfile = useSelector(state => state.userOrders.orders);
   const ingredients = useSelector(state => state.ingredients.items);
+    
+  const orderData = useMemo(() => {
+    return ordersFromFeed.find(order => order.number === Number(number)) ||
+    ordersFromProfile.find(order => order.number === Number(number));
+  }, [ordersFromFeed, ordersFromProfile, number]);
 
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;

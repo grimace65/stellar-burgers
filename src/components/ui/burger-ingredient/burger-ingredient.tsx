@@ -9,17 +9,20 @@ import {
 } from '@zlden/react-developer-burger-ui-components';
 
 import { TBurgerIngredientUIProps } from './type';
+import { useLocation } from 'react-router-dom';
 
 export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
-  ({ ingredient, count, handleAdd, locationState }) => {
+  ({ ingredient, count, handleAdd }) => {
     const { image, price, name, _id } = ingredient;
 
+    const location = useLocation();
+    const isConstructorPage = location.pathname === '/';
     return (
       <li className={styles.container}>
         <Link
           className={styles.article}
           to={`/ingredients/${_id}`}
-          state={locationState}
+          state={{ background: location }}
         >
           {count && <Counter count={count} />}
           <img className={styles.img} src={image} alt='картинка ингредиента.' />

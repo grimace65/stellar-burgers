@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -10,12 +11,15 @@ import styles from './order-card.module.css';
 import { OrderCardUIProps } from './type';
 import { OrderStatus } from '@components';
 
+import { useLocation } from 'react-router-dom';
+
 export const OrderCardUI: FC<OrderCardUIProps> = memo(
-  ({ orderInfo, maxIngredients, locationState }) => (
-    <Link
+  ({ orderInfo, maxIngredients }) => {
+    const location = useLocation();
+    return ( <Link
       to={`/feed/${orderInfo.number}`}
       relative='path'
-      state={locationState}
+      state={{ background: location }}
       className={`p-6 mb-4 mr-2 ${styles.order}`}
     >
       <div className={styles.order_info}>
@@ -75,5 +79,6 @@ export const OrderCardUI: FC<OrderCardUIProps> = memo(
         </div>
       </div>
     </Link>
-  )
+    )
+  }
 );

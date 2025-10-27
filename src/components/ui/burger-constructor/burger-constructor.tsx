@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { FC } from 'react';
 import {
   Button,
@@ -17,8 +18,9 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
   orderModalData,
   onOrderClick,
   closeOrderModal
-}) => (
-  <section className={styles.burger_constructor}>
+}) => {
+  const canMakeOrder = constructorItems.bun !== null;
+  return ( <section className={styles.burger_constructor}>
     {constructorItems.bun ? (
       <div className={`${styles.element} mb-4 mr-4`}>
         <ConstructorElement
@@ -44,7 +46,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
               ingredient={item}
               index={index}
               totalItems={constructorItems.ingredients.length}
-              key={item.id}
+              key={`${item._id}-${index}`}
             />
           )
         )
@@ -84,6 +86,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         size='large'
         children='Оформить заказ'
         onClick={onOrderClick}
+        disabled={!canMakeOrder || orderRequest}
       />
     </div>
 
@@ -102,4 +105,5 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
       </Modal>
     )}
   </section>
-);
+  )
+};
