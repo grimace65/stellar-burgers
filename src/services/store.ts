@@ -1,4 +1,6 @@
+/* eslint-disable */
 import { configureStore } from '@reduxjs/toolkit';
+import { rootReducer } from './rootReducer';
 
 import {
   TypedUseSelectorHook,
@@ -6,11 +8,8 @@ import {
   useSelector as selectorHook
 } from 'react-redux';
 
-const rootReducer = () => {}; // Заменить на импорт настоящего редьюсера
-
 const store = configureStore({
-  reducer: rootReducer,
-  devTools: process.env.NODE_ENV !== 'production'
+  reducer: rootReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

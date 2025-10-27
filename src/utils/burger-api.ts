@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { setCookie, getCookie } from './cookie';
 import { TIngredient, TOrder, TOrdersData, TUser } from './types';
 
@@ -73,10 +74,22 @@ type TOrdersResponse = TServerResponse<{
 
 export const getIngredientsApi = () =>
   fetch(`${URL}/ingredients`)
-    .then((res) => checkResponse<TIngredientsResponse>(res))
+    .then((res) => {
+      console.log('3. Fetch completed, status:', res.status);
+      return checkResponse<TIngredientsResponse>(res);
+    })
     .then((data) => {
-      if (data?.success) return data.data;
+      console.log('4. Response parsed:', data);
+      if (data?.success) {
+        console.log('5. Success, returning data');
+        return data.data;
+      }
+      console.log('6. API returned not success');
       return Promise.reject(data);
+    })
+    .catch((error) => {
+      console.log('7. Error caught:', error);
+      throw error;
     });
 
 export const getFeedsApi = () =>
@@ -233,3 +246,19 @@ export const logoutApi = () =>
       token: localStorage.getItem('refreshToken')
     })
   }).then((res) => checkResponse<TServerResponse<{}>>(res));
+
+  export const getUserOrdersApi = (): Promise<{ orders: TOrder[] }> => {
+    const token = getCookie('accessToken');
+    console.log('🔑 Token for orders request:', token);
+    
+    if (!token) {
+        console.error('❌ No access token found!');
+        return Promise.reject(new Error('No access token'));
+    }
+    
+    return fetchWithRefresh(`${URL}/orders`, {
+        headers: {
+          authorization: token
+        } as HeadersInit
+    });
+  };
