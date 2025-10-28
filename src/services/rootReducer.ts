@@ -1,11 +1,12 @@
 /* eslint-disable */
 import { combineReducers } from '@reduxjs/toolkit';
-import { ingredientsReducer } from './slices/slice';
-import { burgerConstructorReducer } from './slices/slice';
-import { orderSliceReducer } from './slices/slice';
-import { getOrdersSliceReducer } from './slices/slice';
-import { userSliceReducer } from './slices/slice';
-import { userOrderSliceReducer } from './slices/slice';
+import { ingredientsReducer } from './slices/ingredientsSlices';
+import { burgerConstructorReducer } from './slices/ingredientsSlices';
+import { orderSliceReducer } from './slices/ordersSlices';
+import { getOrdersSliceReducer } from './slices/ordersSlices';
+import { userSliceReducer } from './slices/userSlice';
+import { userOrderSliceReducer } from './slices/ordersSlices';
+import { currentOrderSliceReducer } from './slices/ordersSlices';
 import { get } from 'http';
 
 export const rootReducer = combineReducers({
@@ -15,4 +16,5 @@ export const rootReducer = combineReducers({
   getOrders: getOrdersSliceReducer,
   user: userSliceReducer,
   userOrders: userOrderSliceReducer,
+  currentOrder: currentOrderSliceReducer
 });

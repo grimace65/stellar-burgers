@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './burger-ingredient.module.css';
@@ -16,7 +17,7 @@ export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
     const { image, price, name, _id } = ingredient;
 
     const location = useLocation();
-    const isConstructorPage = location.pathname === '/';
+
     return (
       <li className={styles.container}>
         <Link

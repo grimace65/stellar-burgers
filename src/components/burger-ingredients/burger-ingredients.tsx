@@ -5,7 +5,7 @@ import { TTabMode } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 
 import { useDispatch, useSelector } from '../../services/store';
-import { fetchIngredients } from '../../services/slices/slice';
+import { fetchIngredients } from '../../services/slices/ingredientsSlices';
 
 export const BurgerIngredients: FC = () => {
   const dispatch = useDispatch();

@@ -5,7 +5,7 @@ import { FC } from 'react';
 import { useSelector } from '../../services/store';
 import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
-import { getUserOrders } from '../../services/slices/slice';
+import { getUserOrders } from '../../services/slices/ordersSlices';
 import { Preloader } from '@ui';
 
 export const ProfileOrders: FC = () => {

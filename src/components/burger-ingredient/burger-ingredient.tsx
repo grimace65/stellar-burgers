@@ -6,7 +6,7 @@ import { BurgerIngredientUI } from '@ui';
 import { TBurgerIngredientProps } from './type';
 
 import { useDispatch } from '../../services/store';
-import { addBun, addIngredient, removeIngr } from '../../services/slices/slice';
+import { addBun, addIngredient, removeIngr } from '../../services/slices/ingredientsSlices';
 
 export const BurgerIngredient: FC<TBurgerIngredientProps> = memo(
   ({ ingredient, count }) => {

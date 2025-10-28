@@ -6,8 +6,8 @@ import { FC } from 'react';
 import { useSelector } from '../../services/store';
 import { useEffect } from 'react';
 import { useDispatch } from '../../services/store';
-import { getFeed } from '../../services/slices/slice';
-import { fetchIngredients } from '../../services/slices/slice';
+import { getFeed } from '../../services/slices/ordersSlices';
+import { fetchIngredients } from '../../services/slices/ingredientsSlices';
 
 export const Feed: FC = () => {
   const dispatch = useDispatch();

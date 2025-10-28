@@ -11,10 +11,11 @@ import { IngredientDetails } from '@components';
 import { useEffect } from 'react';
 import { getCookie } from '../../utils/cookie';
 import { useDispatch } from '../../services/store';
-import { getUser } from '../../services/slices/slice';
+import { getUser } from '../../services/slices/userSlice';
 import { ProtectedRoute } from '../protected-route';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { fetchIngredients } from '../../services/slices/ingredientsSlices';
 
 function AppContent() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function AppContent() {
     if (token) {
       dispatch(getUser());
     }
+    dispatch(fetchIngredients());
   }, [dispatch]);
 
   return (
@@ -81,9 +83,11 @@ function AppContent() {
           <Route
             path="/profile/orders/:number"
             element={
-              <Modal title="Детали заказа" onClose={() => navigate(-1)}>
-                <OrderInfo />
-              </Modal>
+              <ProtectedRoute>
+                <Modal title="Детали заказа" onClose={() => navigate(-1)}>
+                  <OrderInfo />
+                </Modal>
+              </ProtectedRoute>
             }
           />
         </Routes>
