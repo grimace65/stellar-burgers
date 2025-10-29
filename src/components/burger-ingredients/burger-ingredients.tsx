@@ -9,10 +9,7 @@ import { fetchIngredients } from '../../services/slices/ingredientsSlices';
 
 export const BurgerIngredients: FC = () => {
   const dispatch = useDispatch();
-    const { items: ingredients } = useSelector(state => state.ingredients);
-    useEffect(() => {
-      dispatch(fetchIngredients());
-    }, [dispatch]);
+  const { items: ingredients } = useSelector(state => state.ingredients);
 
   const buns = ingredients.filter((item) => item.type === 'bun');;
   const mains = ingredients.filter((item) => item.type === 'main');

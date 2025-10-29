@@ -17,7 +17,9 @@ export const OrderCardUI: FC<OrderCardUIProps> = memo(
   ({ orderInfo, maxIngredients }) => {
     const location = useLocation();
     return ( <Link
-      to={`/profile/orders/${orderInfo.number}`}
+      to={location.pathname === '/feed' 
+        ? `/feed/${orderInfo.number}`
+        : `/profile/orders/${orderInfo.number}`}
       relative='path'
       state={{ background: location }}
       className={`p-6 mb-4 mr-2 ${styles.order}`}
