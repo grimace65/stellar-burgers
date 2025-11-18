@@ -55,7 +55,6 @@ export const orderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(postOrder.pending, (state) => {
-        console.log('Ingredients fetch pending');
         state.loading = true;
         state.error = null;
       })

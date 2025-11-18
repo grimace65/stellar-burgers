@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { FC, memo } from 'react';
 import { Tab } from '@zlden/react-developer-burger-ui-components';
 

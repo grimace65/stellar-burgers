@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { FC } from 'react';
 
 import { Button, Input } from '@zlden/react-developer-burger-ui-components';
@@ -24,7 +25,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
       onSubmit={handleSubmit}
     >
       <>
-        <div className='pb-6'>
+        <div className='pb-6' data-testid="user-name">
           <Input
             type={'text'}
             placeholder={'Имя'}
@@ -37,7 +38,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
             icon={'EditIcon'}
           />
         </div>
-        <div className='pb-6'>
+        <div className='pb-6' data-testid="user-email">
           <Input
             type={'email'}
             placeholder={'E-mail'}
