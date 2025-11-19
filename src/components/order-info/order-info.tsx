@@ -1,23 +1,40 @@
+/* eslint-disable */
 import { FC, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
+import { useSelector } from '../../services/store';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from '../../services/store';
+import { fetchOrderByNumber } from '../../services/slices/ordersSlices';
 
 export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0
-  };
+  const { number } = useParams();
+  const dispatch = useDispatch();
+  const ordersFromFeed = useSelector(state => state.getOrders.orders);
+  const ordersFromProfile = useSelector(state => state.userOrders.orders);
+  const ingredients = useSelector(state => state.ingredients.items);
+  const currentOrder = useSelector(state => state.currentOrder.order);
+    
+  // const orderData = useMemo(() => {
+  //   return ordersFromFeed.find(order => order.number === Number(number)) ||
+  //   ordersFromProfile.find(order => order.number === Number(number));
+  // }, [ordersFromFeed, ordersFromProfile, number]);
 
-  const ingredients: TIngredient[] = [];
+  const orderFromStore = useMemo(() => {
+    return ordersFromFeed.find(order => order.number === Number(number)) ||
+    ordersFromProfile.find(order => order.number === Number(number));
+  }, [ordersFromFeed, ordersFromProfile, number]);
 
-  /* Готовим данные для отображения */
+  useEffect(() => {
+    if (!orderFromStore && number) {
+      dispatch(fetchOrderByNumber(number));
+    }
+  }, [dispatch, number, orderFromStore]);
+
+  const orderData = orderFromStore || currentOrder;
+
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { FC } from 'react';
 import styles from './profile-menu.module.css';
 import { NavLink } from 'react-router-dom';
@@ -12,8 +13,8 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
       to={'/profile'}
       className={({ isActive }) =>
         `text text_type_main-medium text_color_inactive pt-4 pb-4 ${
-          styles.link
-        } ${isActive ? styles.link_active : ''}`
+            styles.link
+        } ${(isActive || pathname === '/profile') ? styles.link_active : ''}`
       }
       end
     >
@@ -23,8 +24,8 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
       to={'/profile/orders'}
       className={({ isActive }) =>
         `text text_type_main-medium text_color_inactive pt-4 pb-4 ${
-          styles.link
-        } ${isActive ? styles.link_active : ''}`
+            styles.link
+        } ${(isActive || pathname === '/profile/orders') ? styles.link_active : ''}`
       }
     >
       История заказов

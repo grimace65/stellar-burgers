@@ -6,6 +6,11 @@
   color: #f2f2f3;
 }
 
+.homeLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
